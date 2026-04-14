@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support — AmanahDigital</title>
+  <meta name="description" content="Get support, send feedback, request features, or report issues with AmanahDigital products.">
+
+  <!-- Canonical / GitHub Pages custom domain -->
+  <link rel="canonical" href="https://support.amanahdigital.co.uk/">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Design tokens ──────────────────────────────── */
+    :root {
+      --black:   #0d0d0d;
+      --dark:    #111214;
+      --surface: #181a1e;
+      --border:  #2a2c32;
+      --gold:    #c9a84c;
+      --gold-lt: #e8c87a;
+      --text:    #e8e3d8;
+      --muted:   #7a7870;
+      --error:   #c0584c;
+      --success: #5a9e7c;
+      --radius:  10px;
+      --radius-sm: 6px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --black:   #faf5ec;
+        --dark:    #f0ead9;
+        --surface: #e8e0ce;
+        --border:  #cfc5ad;
+        --text:    #1c1610;
+        --muted:   #6b5f4a;
+      }
+    }
+
+    /* ── Reset ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ─────────────────────────────────────── */
+    header {
+      background: var(--black);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+    }
+
+    .header-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      line-height: 1.2;
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 0.03em;
+    }
+
+    .brand-label {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .header-link {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .header-link:hover { color: var(--gold-lt); }
+
+    /* ── Hero ───────────────────────────────────────── */
+    .hero {
+      background: var(--black);
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 span { color: var(--gold); font-style: italic; }
+
+    .hero p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 440px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── Type cards ─────────────────────────────────── */
+    .type-section {
+      padding: 2rem 1.5rem 0;
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .type-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 500px) {
+      .type-grid { grid-template-columns: 1fr; }
+    }
+
+    .type-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      user-select: none;
+    }
+
+    .type-card:hover {
+      border-color: var(--gold);
+    }
+
+    .type-card.active {
+      border-color: var(--gold);
+      background: rgba(201, 168, 76, 0.07);
+    }
+
+    .type-card .card-icon {
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .type-card .card-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .type-card .card-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── Form ───────────────────────────────────────── */
+    main {
+      flex: 1;
+      padding: 1.5rem 1.5rem 3rem;
+    }
+
+    form {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 540px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    label .req {
+      color: var(--gold);
+      margin-left: 2px;
+    }
+
+    input, select, textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.7rem 0.9rem;
+      width: 100%;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .select-wrap {
+      position: relative;
+    }
+
+    .select-wrap::after {
+      content: '▾';
+      position: absolute;
+      right: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      font-size: 0.8rem;
+    }
+
+    select option {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .hint a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .hint a:hover { text-decoration: underline; }
+
+    /* ── Submit button ──────────────────────────────── */
+    .btn-submit {
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 0.8rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      align-self: flex-start;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-submit:hover { background: var(--gold-lt); }
+    .btn-submit:active { transform: scale(0.98); }
+    .btn-submit:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ── Alert messages ─────────────────────────────── */
+    .alert {
+      border-radius: var(--radius-sm);
+      padding: 0.8rem 1rem;
+      font-size: 0.85rem;
+      display: none;
+    }
+
+    .alert.visible { display: block; }
+
+    .alert-success {
+      background: rgba(90, 158, 124, 0.12);
+      border: 1px solid rgba(90, 158, 124, 0.4);
+      color: #8ecfab;
+    }
+
+    .alert-error {
+      background: rgba(192, 88, 76, 0.12);
+      border: 1px solid rgba(192, 88, 76, 0.4);
+      color: #e09088;
+    }
+
+    /* ── Footer ─────────────────────────────────────── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Divider ────────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header>
+    <div class="header-inner">
+      <a class="brand" href="https://amanahdigital.co.uk" target="_blank" rel="noopener">
+        <span class="brand-name">AmanahDigital</span>
+        <span class="brand-label">Support</span>
+      </a>
+      <a class="header-link" href="https://amanahdigital.co.uk" target="_blank" rel="noopener">← Back to main site</a>
+    </div>
+  </header>
+
+  <!-- ── Hero ── -->
+  <div class="hero">
+    <h1>How can we <span>help?</span></h1>
+    <p>Send us feedback, request a new feature, or report a problem with any of our products. We read everything.</p>
+  </div>
+
+  <!-- ── Type selector ── -->
+  <div class="type-section">
+    <div class="type-grid" role="group" aria-label="Type of submission">
+      <button type="button" class="type-card active" data-type="feedback" aria-pressed="true">
+        <span class="card-icon" aria-hidden="true">💬</span>
+        <span class="card-title">Feedback</span>
+        <span class="card-desc">Share thoughts on what's working or what could be better.</span>
+      </button>
+      <button type="button" class="type-card" data-type="feature_request" aria-pressed="false">
+        <span class="card-icon" aria-hidden="true">✨</span>
+        <span class="card-title">Feature Request</span>
+        <span class="card-desc">Suggest something new you'd like to see added.</span>
+      </button>
+      <button type="button" class="type-card" data-type="bug_report" aria-pressed="false">
+        <span class="card-icon" aria-hidden="true">🐛</span>
+        <span class="card-title">Bug Report</span>
+        <span class="card-desc">Something isn't working as expected? Let us know.</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Main form ── -->
+  <main>
+    <form id="support-form" novalidate>
+
+      <!-- Hidden type field -->
+      <input type="hidden" id="submission-type" value="feedback">
+
+      <!-- Product + Email row -->
+      <div class="form-row">
+
+        <div class="field">
+          <label for="product">Product <span class="req" aria-hidden="true">*</span></label>
+          <div class="select-wrap">
+            <select id="product" name="product" required>
+              <option value="" disabled selected>Select a product…</option>
+              <optgroup label="Products">
+                <option value="Noor: A Better Ramadan">Noor: A Better Ramadan</option>
+                <option value="Khatam Together">Khatam Together</option>
+                <option value="Sadaqah Jariyah Radio">Sadaqah Jariyah Radio</option>
+                <option value="Taraaweeh Counter">Taraaweeh Counter</option>
+                <option value="Islamic Quiz">Islamic Quiz</option>
+              </optgroup>
+              <option value="General">General / Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Your Email <span class="req" aria-hidden="true">*</span></label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            autocomplete="email"
+            placeholder="you@example.com"
+          >
+          <span class="hint">We may reach out if we need more information.</span>
+        </div>
+
+      </div>
+
+      <!-- Subject -->
+      <div class="field">
+        <label for="subject">Subject <span class="req" aria-hidden="true">*</span></label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          required
+          maxlength="200"
+          placeholder="Brief summary…"
+        >
+      </div>
+
+      <!-- Message -->
+      <div class="field">
+        <label for="message">Details <span class="req" aria-hidden="true">*</span></label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          placeholder="Please describe your feedback, request, or issue in as much detail as you can…"
+          maxlength="5000"
+        ></textarea>
+      </div>
+
+      <!-- Alerts -->
+      <div id="alert-success" class="alert alert-success" role="alert" aria-live="polite">
+        ✓ Submitted — thank you! We'll be in touch if we need anything further.
+      </div>
+      <div id="alert-error" class="alert alert-error" role="alert" aria-live="polite">
+        Something went wrong. Please try again, or email us directly at
+        <a href="mailto:support@amanahdigital.co.uk">support@amanahdigital.co.uk</a>.
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn-submit" id="submit-btn">Send Message</button>
+
+    </form>
+  </main>
+
+  <hr class="divider">
+
+  <!-- ── Footer ── -->
+  <footer>
+    <p>
+      <a href="https://amanahdigital.co.uk" target="_blank" rel="noopener">AmanahDigital</a>
+      &nbsp;·&nbsp; dedicated to creating impactful tools that nurture iman and serve the Ummah.
+    </p>
+  </footer>
+
+  <script>
+    // ── Supabase config — replace these before deploying ──────────────
+    const SUPABASE_URL  = 'https://qsvzhstdkumfokrmqqrs.supabase.co';       // e.g. https://xyzxyz.supabase.co
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFzdnpoc3Rka3VtZm9rcm1xcXJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwOTIwNjIsImV4cCI6MjA4ODY2ODA2Mn0.GwT4jGkowVacjpVT80KpkQrRMxwRQa-NqEbQpXD4NDY';  // public anon key (safe for frontend)
+    // ──────────────────────────────────────────────────────────────────
+
+    // Type card toggle
+    const cards = document.querySelectorAll('.type-card');
+    const typeInput = document.getElementById('submission-type');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        cards.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
+        card.classList.add('active');
+        card.setAttribute('aria-pressed', 'true');
+        typeInput.value = card.dataset.type;
+      });
+    });
+
+    // Form submission
+    const form    = document.getElementById('support-form');
+    const btnEl   = document.getElementById('submit-btn');
+    const okEl    = document.getElementById('alert-success');
+    const errEl   = document.getElementById('alert-error');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Basic client-side validation
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      btnEl.disabled = true;
+      btnEl.textContent = 'Sending…';
+      okEl.classList.remove('visible');
+      errEl.classList.remove('visible');
+
+      const payload = {
+        type:    typeInput.value,
+        product: document.getElementById('product').value,
+        email:   document.getElementById('email').value.trim().toLowerCase(),
+        subject: document.getElementById('subject').value.trim(),
+        message: document.getElementById('message').value.trim(),
+      };
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/support_feedback`, {
+          method:  'POST',
+          headers: {
+            'Content-Type':    'application/json',
+            'apikey':          SUPABASE_ANON,
+            'Authorization':   `Bearer ${SUPABASE_ANON}`,
+            'Content-Profile': 'support',   // target the support schema
+            'Prefer':          'return=minimal',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        form.reset();
+        // Reset type selection back to default
+        cards.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
+        cards[0].classList.add('active');
+        cards[0].setAttribute('aria-pressed', 'true');
+        typeInput.value = 'feedback';
+
+        okEl.classList.add('visible');
+        okEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      } catch (err) {
+        console.error(err);
+        errEl.classList.add('visible');
+        errEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } finally {
+        btnEl.disabled = false;
+        btnEl.textContent = 'Send Message';
+      }
+    });
+  </script>
+
+</body>
+</html>
